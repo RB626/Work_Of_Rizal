@@ -1,0 +1,2349 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Life and Works of Jose Rizal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --page-bg: #8c7456;
+      --frame: #5c4a3a;
+      --frame-dark: #3b2f1f;
+      --paper: #f8f1e4;
+      --panel: #ede0c8;
+      --panel-dark: #d4c4b0;
+      --gold: #c9972a;
+      --gold-border: rgba(201, 151, 42, 0.55);
+      --text: #4a3010;
+      --title: #3b2f1f;
+      --italic: #6b3a10;
+      --line: rgba(201, 151, 42, .38);
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    body {
+      margin: 0;
+      background: #ddd;
+      color: var(--text);
+      font-family: Georgia, 'Times New Roman', serif;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: url("background.png") center/cover no-repeat;
+      opacity: 0.22;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .canvas {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      background: transparent;
+      padding: 18px 22px 36px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .ornament-wrap {
+      position: relative;
+      width: min(100%, 1280px);
+      padding: 16px;
+      background: rgba(92, 74, 58, 0.38);
+      box-shadow: inset 0 20px 60px rgba(255, 255, 255, .05), inset 0 -20px 60px rgba(0, 0, 0, .12);
+      border-radius: 3px;
+      z-index: 1;
+    }
+
+    .frame-line {
+      position: absolute;
+      inset: 14px;
+      border: 3px solid rgba(92, 74, 58, .78);
+      border-radius: 6px;
+      pointer-events: none;
+    }
+
+    .corner {
+      position: absolute;
+      width: 34px;
+      height: 34px;
+      background: rgba(140, 116, 86, 0.62);
+      z-index: 2;
+    }
+
+    .corner.tl {
+      top: 13px;
+      left: 13px;
+      border-top: 3px solid var(--frame-dark);
+      border-left: 3px solid var(--frame-dark)
+    }
+
+    .corner.tr {
+      top: 13px;
+      right: 13px;
+      border-top: 3px solid var(--frame-dark);
+      border-right: 3px solid var(--frame-dark)
+    }
+
+    .corner.bl {
+      bottom: 13px;
+      left: 13px;
+      border-bottom: 3px solid var(--frame-dark);
+      border-left: 3px solid var(--frame-dark)
+    }
+
+    .corner.br {
+      bottom: 13px;
+      right: 13px;
+      border-bottom: 3px solid var(--frame-dark);
+      border-right: 3px solid var(--frame-dark)
+    }
+
+    .star {
+      position: absolute;
+      color: var(--gold);
+      font-size: 15px;
+      line-height: 1;
+      opacity: .95;
+      text-shadow: 0 1px 0 rgba(0, 0, 0, .05);
+    }
+
+    .star.left {
+      left: 4px;
+      top: 66%
+    }
+
+    .star.right {
+      right: 4px;
+      top: 34%
+    }
+
+    .page {
+      position: relative;
+      width: 100%;
+      max-width: 1200px;
+      margin: 10px auto;
+      background: rgba(248, 241, 228, 0.82);
+      border: 8px solid var(--frame);
+      box-shadow: 0 24px 48px rgba(0, 0, 0, .20);
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .ribbon,
+    .footer {
+      background: linear-gradient(90deg, #5c4a3a 0%, #6b5544 50%, #5c4a3a 100%);
+      color: var(--paper);
+      font-family: 'Jost', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-size: 11px;
+      text-align: center;
+    }
+
+    .ribbon {
+      padding: 10px 24px 9px;
+      border-bottom: 4px solid var(--frame-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .ribbon .line {
+      width: 52px;
+      height: 2px;
+      background: var(--gold)
+    }
+
+    .hero {
+      position: relative;
+      background: rgba(237, 224, 200, 0.42);
+      padding: 24px 32px 18px;
+      border-bottom: 1px solid rgba(201, 151, 42, 0.24);
+      text-align: center;
+    }
+
+    .flourish {
+      position: absolute;
+      top: 16px;
+      color: rgba(201, 151, 42, .55);
+      font-size: 32px;
+      font-family: 'Playfair Display', serif;
+      line-height: 1;
+    }
+
+    .flourish.left {
+      left: 16px;
+      transform: rotate(-8deg)
+    }
+
+    .flourish.right {
+      right: 16px;
+      transform: scaleX(-1) rotate(-8deg)
+    }
+
+    h1 {
+      margin: 0;
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      font-size: 80px;
+      line-height: .95;
+      color: var(--title);
+    }
+
+    h1 em {
+      color: var(--italic);
+      font-style: italic;
+      font-weight: 600
+    }
+
+    .dates {
+      margin-top: 8px;
+      font-family: 'Jost', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-size: 13px;
+      color: #6c5842;
+    }
+
+    .tabs {
+      background: rgba(212, 196, 176, 0.42);
+      border-bottom: 1px solid rgba(201, 151, 42, 0.22);
+      padding: 10px 18px;
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .tab {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      height: 38px;
+      padding: 0 14px;
+      border-radius: 3px;
+      border: 1px solid rgba(92, 74, 58, .18);
+      background: var(--panel);
+      font-family: 'Jost', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: var(--frame);
+      letter-spacing: .45px;
+      cursor: pointer;
+      appearance: none;
+      outline: none;
+      line-height: 1;
+    }
+
+    .tab.active {
+      background: var(--frame);
+      color: var(--paper);
+      border-color: transparent
+    }
+
+    .tab .ico {
+      width: 16px;
+      height: 16px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 16px;
+      line-height: 1;
+    }
+
+    .tab .ico svg {
+      width: 16px;
+      height: 16px;
+      display: block;
+      stroke: currentColor;
+      stroke-width: 2;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .content {
+      padding: 26px 26px 22px;
+      display: grid;
+      grid-template-columns: 250px 1fr;
+      gap: 28px;
+      min-height: 560px;
+    }
+
+    .left-col {
+      display: flex;
+      flex-direction: column;
+      gap: 18px
+    }
+
+    .portrait-card,
+    .facts,
+    .about,
+    .feature,
+    .work-card,
+    .legacy-info,
+    .legacy-box,
+    .legacy-quote,
+    .gallery-card,
+    .story-card {
+      background: rgba(237, 224, 200, 0.72);
+    }
+
+    .portrait-card {
+      padding: 16px 16px 12px;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, .08)
+    }
+
+    .portrait-frame {
+      width: 100%;
+      height: 220px;
+      background: #d7cec0;
+      border: 4px solid var(--frame);
+      padding: 0px;
+      overflow: hidden;
+      display: flex;
+    }
+
+    .portrait-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      object-position: center top;
+    }
+
+    .portrait-mat {
+      width: 100%;
+      height: 32px;
+      background: #f7f4ef;
+      border: 1px solid rgba(201, 151, 42, .25);
+    }
+
+    .portrait-caption {
+      text-align: center;
+      margin-top: 10px;
+      color: #7b6144;
+    }
+
+    .portrait-caption .name {
+      font-family: 'Playfair Display', serif;
+      font-size: 13px;
+      font-style: italic;
+      line-height: 1.35;
+    }
+
+    .portrait-caption .sub {
+      font-family: 'Jost', sans-serif;
+      font-size: 11px;
+      line-height: 1.3;
+    }
+
+    .facts {
+      padding: 14px 14px 10px
+    }
+
+    .facts h3,
+    .about h2 {
+      margin: 0;
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      color: var(--title);
+    }
+
+    .facts h3 {
+      font-size: 22px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .facts h3 .star-icon {
+      color: var(--gold);
+      font-size: 16px
+    }
+
+    .fact-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(201, 151, 42, .22);
+      font-size: 13px;
+      line-height: 1.35;
+    }
+
+    .fact-row:last-child {
+      border-bottom: none
+    }
+
+    .fact-row .label {
+      color: #7b6144
+    }
+
+    .fact-row .value {
+      text-align: right
+    }
+
+    .about {
+      padding: 18px 20px 20px
+    }
+
+    .about h2 {
+      font-size: 30px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(201, 151, 42, .30);
+      margin-bottom: 14px
+    }
+
+    .about p {
+      margin: 0 0 14px;
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--text);
+    }
+
+    .about strong {
+      font-weight: 700;
+      color: var(--title)
+    }
+
+    .quote {
+      margin: 8px 0 14px;
+      padding: 8px 0 8px 14px;
+      border-left: 4px solid var(--gold);
+      font-size: 15px;
+      line-height: 1.8;
+      font-style: italic;
+      color: #684b22;
+    }
+
+    .features {
+      margin-top: 14px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .feature {
+      min-height: 100px;
+      padding: 16px 12px 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .feature .icon {
+      width: 28px;
+      height: 28px;
+      color: var(--gold);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+    }
+
+    .feature .icon svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+      stroke: var(--gold);
+      stroke-width: 1.8;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .icon {
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .icon img {
+      width: 100%;
+      height: 100%;
+    }
+
+    .feature .title {
+      font-family: 'Playfair Display', serif;
+      font-size: 17px;
+      color: var(--title);
+      margin-bottom: 6px;
+    }
+
+    .feature .desc {
+      font-family: 'Jost', sans-serif;
+      font-size: 11px;
+      color: #7b6144;
+      line-height: 1.45;
+    }
+
+    .footer {
+      border-top: 4px solid var(--frame-dark);
+      padding: 10px 20px 11px;
+      letter-spacing: 2.7px;
+    }
+
+    .tab-section {
+      display: none;
+    }
+
+    .tab-section.active {
+      display: block;
+    }
+
+    .life-story-wrap {
+      padding: 26px 26px 22px;
+    }
+
+    .life-story-title {
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 30px;
+      color: var(--title);
+      margin: 6px 0 16px;
+    }
+
+    .life-story-divider {
+      height: 1px;
+      background: rgba(201, 151, 42, .40);
+      margin-bottom: 16px;
+    }
+
+    .life-story-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .story-card {
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      gap: 20px;
+      background: var(--panel);
+      border: 2px solid rgba(201, 151, 42, .30);
+      padding: 18px;
+      align-items: start;
+    }
+
+    .story-image-frame {
+      width: 150px;
+      height: 140px;
+      border: 3px solid var(--frame);
+      background: #d8ccb8;
+      padding: 4px;
+      overflow: hidden;
+    }
+
+    .story-image-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .story-year {
+      font-family: 'Jost', sans-serif;
+      font-size: 12px;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      color: #c5a15a;
+      margin-bottom: 6px;
+    }
+
+    .story-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 600;
+      color: #6d5a3b;
+      margin: 0 0 10px;
+    }
+
+    .story-text {
+      font-size: 14px;
+      line-height: 1.8;
+      color: var(--text);
+      margin: 0;
+    }
+
+    .works-wrap {
+      padding: 26px 26px 22px;
+    }
+
+    .works-title {
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 30px;
+      color: var(--title);
+      margin: 6px 0 16px;
+    }
+
+    .works-divider {
+      height: 1px;
+      background: rgba(201, 151, 42, .40);
+      margin-bottom: 16px;
+    }
+
+    .works-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .work-card {
+      background: var(--panel);
+      border: 2px solid rgba(201, 151, 42, .30);
+      overflow: hidden;
+    }
+
+    .work-top {
+      color: #f8f1e4;
+      text-align: center;
+      padding: 14px 14px 10px;
+    }
+
+    .work-top.purple {
+      background: #4b2376;
+    }
+
+    .work-top.green {
+      background: #1f5d22;
+    }
+
+    .work-top.brown {
+      background: #8a4d0f;
+    }
+
+    .work-top.blue {
+      background: #25498b;
+    }
+
+    .work-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      font-style: italic;
+      line-height: 1.2;
+      margin-bottom: 4px;
+    }
+
+    .work-meta {
+      font-family: 'Jost', sans-serif;
+      font-size: 12px;
+      letter-spacing: .8px;
+      opacity: .92;
+    }
+
+    .work-body {
+      padding: 16px;
+    }
+
+    .work-image-frame {
+      width: 100%;
+      height: 600px;
+      background: #e9dfcf;
+      padding: 3px;
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+
+    .work-image-frame img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .work-text {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--text);
+      margin: 0;
+    }
+
+    .legacy-wrap {
+      padding: 26px 26px 22px;
+    }
+
+    .legacy-title {
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 30px;
+      color: var(--title);
+      margin: 6px 0 16px;
+    }
+
+    .legacy-divider {
+      height: 1px;
+      background: rgba(201, 151, 42, .40);
+      margin-bottom: 16px;
+    }
+
+    .legacy-quote {
+      background: var(--panel);
+      border: 2px solid rgba(201, 151, 42, .30);
+      padding: 24px;
+      text-align: center;
+      font-style: italic;
+      font-size: 18px;
+      line-height: 1.7;
+      color: #6b4b1f;
+      margin-bottom: 16px;
+    }
+
+    .legacy-quote span {
+      display: block;
+      font-style: normal;
+      font-size: 12px;
+      margin-top: 10px;
+      color: #7b6144;
+    }
+
+    .legacy-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .legacy-box {
+      background: var(--panel);
+      border: 2px solid rgba(201, 151, 42, .30);
+      text-align: center;
+      padding: 16px 8px;
+    }
+
+    .legacy-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 30px;
+      color: var(--gold);
+    }
+
+    .legacy-label {
+      font-size: 11px;
+      letter-spacing: .8px;
+      margin-top: 6px;
+    }
+
+    .legacy-info {
+      background: var(--panel);
+      border: 2px solid rgba(201, 151, 42, .30);
+      padding: 18px;
+    }
+
+    .legacy-info h3 {
+      margin: 0 0 12px;
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+    }
+
+    .legacy-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .legacy-item {
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .legacy-item strong {
+      display: block;
+      color: var(--title);
+      margin-bottom: 2px;
+    }
+
+    .legacy-item span {
+      color: #7b6144;
+    }
+
+    .gallery-wrap {
+      padding: 26px 26px 22px;
+    }
+
+    .gallery-title {
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 30px;
+      color: var(--title);
+      margin: 6px 0 16px;
+    }
+
+    .gallery-divider {
+      height: 1px;
+      background: rgba(201, 151, 42, .40);
+      margin-bottom: 16px;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .gallery-card {
+      background: var(--panel);
+      border: 3px solid #6b5847;
+      padding: 10px 10px 8px;
+    }
+
+    .gallery-frame {
+      width: 100%;
+      height: 350px;
+      background: #d6c8b4;
+      border: 2px solid rgba(201, 151, 42, .35);
+      overflow: hidden;
+    }
+
+    .gallery-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .gallery-caption {
+      text-align: center;
+      font-size: 12px;
+      color: #7b6144;
+      margin-top: 6px;
+      line-height: 1.3;
+    }
+
+    /* GRID (TOP PART) */
+    .life-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 30px;
+    }
+
+    .life-box {
+      position: relative;
+      padding: 20px;
+      border: 2px solid rgba(201, 151, 42, 0.35);
+      background: rgba(248, 241, 228, 0.4);
+    }
+
+    .life-number {
+      position: absolute;
+      top: 10px;
+      right: 14px;
+      font-size: 40px;
+      color: rgba(201, 151, 42, 0.25);
+      font-family: 'Playfair Display';
+    }
+
+    .life-label {
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      color: #b48a45;
+      margin-bottom: 6px;
+    }
+
+    .life-box h3 {
+      margin: 0 0 6px;
+      font-family: 'Playfair Display';
+    }
+
+    .life-box p {
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    /* TIMELINE */
+    .timeline-section {
+      position: relative;
+      background: #210f03;
+      border: 2px solid rgba(146, 109, 63, 0.72);
+      padding: 20px 22px 26px;
+      color: #f3e1bf;
+      overflow: hidden;
+    }
+
+    .timeline-title {
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 31px;
+      font-weight: 600;
+      color: #f4ead8;
+      margin: 0 0 24px;
+      line-height: 1.1;
+    }
+
+    .timeline-title em {
+      color: #d5a33a;
+      font-style: italic;
+      font-weight: 500;
+    }
+
+    .timeline {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 29px;
+      top: 18px;
+      bottom: 0;
+      width: 1px;
+      background: rgba(186, 136, 56, 0.38);
+    }
+
+    .timeline-item {
+      position: relative;
+      display: grid;
+      grid-template-columns: 84px 1fr;
+      column-gap: 22px;
+      padding: 0 0 0 30px;
+      min-height: 98px;
+    }
+
+    .timeline-item:not(:last-child) {
+      border-bottom: 1px solid rgba(186, 136, 56, 0.14);
+      margin-bottom: 2px;
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 33px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #ddb24c;
+      box-shadow: 0 0 0 2px rgba(33, 15, 3, 0.95);
+    }
+
+    .year {
+      font-family: 'Playfair Display', serif;
+      font-size: 23px;
+      line-height: 1.15;
+      color: #d3a037;
+      padding-top: 14px;
+      white-space: normal;
+    }
+
+    .timeline-content {
+      padding-top: 10px;
+      padding-bottom: 16px;
+    }
+
+    .timeline-content h3 {
+      margin: 0 0 8px;
+      font-family: 'Playfair Display', serif;
+      font-size: 19px;
+      font-weight: 500;
+      line-height: 1.25;
+      color: #f4ead8;
+    }
+
+    .timeline-content p {
+      margin: 0;
+      font-size: 13.5px;
+      line-height: 1.8;
+      color: rgba(235, 214, 176, 0.78);
+    }
+
+    .family-wrap {
+      padding: 26px;
+    }
+
+    .family-title {
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      color: var(--title);
+      margin-bottom: 10px;
+    }
+
+    .family-divider {
+      height: 1px;
+      background: rgba(201, 151, 42, 0.4);
+      margin-bottom: 20px;
+    }
+
+    /* INTRO BOX */
+    .family-intro {
+      background: var(--panel);
+      border: 2px solid rgba(201, 151, 42, 0.4);
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .family-intro p {
+      font-size: 15px;
+      line-height: 1.8;
+      margin-bottom: 18px;
+    }
+
+    .family-image-box {
+      border: 4px solid var(--frame);
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #7b6144;
+      font-size: 13px;
+    }
+
+    /* GRID */
+    .family-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    /* CARDS */
+    .family-card {
+      background: var(--panel);
+      border: 2px solid rgba(201, 151, 42, 0.4);
+      padding: 20px;
+    }
+
+    .family-card h3 {
+      font-family: 'Playfair Display', serif;
+      margin: 0 0 10px;
+      font-size: 22px;
+      color: var(--title);
+      display: block;
+      align-items: center;
+      gap: 8px;
+      line-height: 1.2;
+    }
+
+    .family-card .star {
+      color: var(--gold);
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      line-height: 1;
+      margin-right: 0;
+      transform: translateY(-1px);
+    }
+
+    .family-card .role {
+      font-size: 12px;
+      color: #b48a45;
+      margin-bottom: 12px;
+      letter-spacing: 1px;
+    }
+
+    .family-card p {
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .family-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      color: var(--title);
+      margin: 0 0 10px;
+
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      /* spacing between star and text */
+    }
+
+    .family-heading .star {
+      color: #c9972a;
+      font-size: 14px;
+      line-height: 1;
+      display: inline-block;
+    }
+
+    .family-card h3 .star {
+      position: relative !important;
+      top: 0;
+      left: 0;
+
+      color: var(--gold);
+      font-size: 14px;
+
+      display: inline-block;
+      vertical-align: middle;
+
+      margin-right: 6px;
+    }
+
+    .siblings-section {
+      margin-top: 18px;
+      border: 2px solid rgba(201, 151, 42, 0.42);
+      background: var(--panel);
+      padding: 16px 18px 18px;
+    }
+
+    .siblings-title {
+      margin: 0;
+      font-family: 'Playfair Display', serif;
+      font-size: 25px;
+      font-weight: 500;
+      color: var(--title);
+      line-height: 1.15;
+    }
+
+    .siblings-divider {
+      height: 1px;
+      background: rgba(201, 151, 42, 0.38);
+      margin: 10px 0 14px;
+    }
+
+    .siblings-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .siblings-column {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .sibling-item {
+      border-left: 4px solid rgba(201, 151, 42, 0.42);
+      padding: 6px 0 6px 12px;
+      min-height: 106px;
+    }
+
+    .sibling-item h3 {
+      margin: 0 0 6px;
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 1.2;
+      color: #4a3010;
+    }
+
+    .sibling-meta {
+      margin-bottom: 6px;
+      font-size: 12px;
+      line-height: 1.3;
+      color: #c9972a;
+    }
+
+    .sibling-item p {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.75;
+      color: #5a4022;
+    }
+
+    .family-values-section {
+      margin-top: 18px;
+      border: 2px solid rgba(201, 151, 42, 0.42);
+      background: var(--panel);
+      padding: 18px 18px 22px;
+    }
+
+    .family-values-title {
+      margin: 0 0 18px;
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      font-weight: 500;
+      line-height: 1.2;
+      color: var(--title);
+    }
+
+    .family-values-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 34px;
+      align-items: start;
+    }
+
+    .family-value-item {
+      text-align: center;
+    }
+
+    .family-value-icon {
+      width: 40px;
+      height: 40px;
+      margin: 0 auto 12px;
+      border-radius: 50%;
+      border: 2px solid rgba(201, 151, 42, 0.55);
+      color: #c9972a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      line-height: 1;
+    }
+
+    .family-value-item h3 {
+      margin: 0 0 8px;
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 500;
+      color: var(--title);
+      line-height: 1.2;
+    }
+
+    .family-value-item p {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.75;
+      color: #5a4022;
+    }
+
+    .family-wrap {
+      padding: 26px 26px 30px;
+    }
+
+    .family-intro,
+    .family-grid,
+    .siblings-section,
+    .family-values-section {
+      max-width: 1040px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .family-intro {
+      margin-bottom: 20px;
+    }
+
+    .family-grid {
+      margin-bottom: 18px;
+    }
+
+    .siblings-section {
+      padding: 18px 20px 20px;
+    }
+
+    .family-values-section {
+      padding: 18px 20px 22px;
+    }
+
+    .siblings-grid {
+      gap: 20px;
+    }
+
+    .family-values-grid {
+      gap: 26px;
+    }
+
+    .family-image-box {
+      position: relative;
+      border: 4px solid var(--frame);
+      height: 800px;
+      overflow: hidden;
+    }
+
+    .family-image-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .family-label {
+      position: absolute;
+      bottom: 6px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 12px;
+      color: #5a4022;
+      background: rgba(248, 241, 228, 0.85);
+      padding: 2px 8px;
+    }
+
+    @media (max-width: 900px) {
+      .content {
+        grid-template-columns: 1fr;
+      }
+
+      .works-grid,
+      .gallery-grid,
+      .legacy-grid,
+      .features {
+        grid-template-columns: 1fr;
+      }
+
+      .legacy-stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .story-card {
+        grid-template-columns: 1fr;
+      }
+
+      .story-image-frame {
+        width: 100%;
+        height: 220px;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .family-values-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .family-wrap {
+        padding: 18px 16px 20px;
+      }
+
+      .family-intro,
+      .family-grid,
+      .siblings-section,
+      .family-values-section {
+        max-width: 100%;
+      }
+
+      .siblings-section,
+      .family-values-section {
+        padding: 14px;
+      }
+
+      .siblings-grid {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
+      .siblings-section {
+        padding: 14px;
+      }
+
+      .siblings-title {
+        font-size: 22px;
+      }
+
+      .sibling-item {
+        min-height: auto;
+      }
+
+      .family-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .timeline-section {
+        padding: 16px 14px 20px;
+      }
+
+      .timeline-title {
+        font-size: 24px;
+        margin-bottom: 18px;
+      }
+
+      .timeline::before {
+        left: 20px;
+      }
+
+      .timeline-item {
+        grid-template-columns: 72px 1fr;
+        column-gap: 14px;
+        padding-left: 22px;
+        min-height: 92px;
+      }
+
+      .timeline-item::before {
+        top: 30px;
+        width: 7px;
+        height: 7px;
+      }
+
+      .year {
+        font-size: 20px;
+        padding-top: 13px;
+      }
+
+      .timeline-content h3 {
+        font-size: 17px;
+      }
+
+      .timeline-content p {
+        font-size: 12.5px;
+        line-height: 1.7;
+      }
+
+      .canvas {
+        padding: 12px;
+      }
+
+      .page {
+        border-width: 5px;
+      }
+
+      h1 {
+        font-size: 52px;
+      }
+
+      .dates {
+        font-size: 11px;
+        letter-spacing: 2px;
+      }
+
+      .content,
+      .life-story-wrap,
+      .works-wrap,
+      .legacy-wrap,
+      .gallery-wrap {
+        padding: 18px 16px 16px;
+      }
+
+      .gallery-grid,
+      .works-grid,
+      .legacy-grid,
+      .features,
+      .legacy-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .story-card {
+        grid-template-columns: 1fr;
+        padding: 14px;
+      }
+
+      .story-image-frame {
+        width: 100%;
+        height: 180px;
+      }
+
+      .work-image-frame,
+      .gallery-frame {
+        height: 170px;
+      }
+
+      .about h2,
+      .life-story-title,
+      .works-title,
+      .legacy-title,
+      .gallery-title {
+        font-size: 24px;
+      }
+
+      .story-heading {
+        font-size: 24px;
+      }
+
+      .work-name {
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="canvas">
+    <div class="ornament-wrap">
+      <div class="frame-line"></div>
+      <div class="corner tl"></div>
+      <div class="corner tr"></div>
+      <div class="corner bl"></div>
+      <div class="corner br"></div>
+      <div class="star left"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"
+          fill="none">
+          <path
+            d="M9.60416 1.91249C9.64068 1.83871 9.69709 1.7766 9.76704 1.73318C9.83698 1.68976 9.91767 1.66675 9.99999 1.66675C10.0823 1.66675 10.163 1.68976 10.233 1.73318C10.3029 1.7766 10.3593 1.83871 10.3958 1.91249L12.3208 5.81166C12.4476 6.0683 12.6348 6.29033 12.8663 6.4587C13.0979 6.62707 13.3668 6.73675 13.65 6.77833L17.955 7.40833C18.0366 7.42015 18.1132 7.45455 18.1762 7.50766C18.2393 7.56076 18.2862 7.63045 18.3117 7.70883C18.3372 7.78721 18.3402 7.87116 18.3205 7.95119C18.3007 8.03121 18.259 8.10412 18.2 8.16166L15.0867 11.1933C14.8813 11.3934 14.7277 11.6404 14.639 11.913C14.5503 12.1856 14.5292 12.4757 14.5775 12.7583L15.3125 17.0417C15.3269 17.1232 15.3181 17.2071 15.2871 17.2839C15.2561 17.3607 15.2041 17.4272 15.1371 17.4758C15.0701 17.5245 14.9908 17.5533 14.9082 17.5591C14.8256 17.5648 14.7431 17.5472 14.67 17.5083L10.8217 15.485C10.5681 15.3518 10.286 15.2823 9.99958 15.2823C9.71318 15.2823 9.43106 15.3518 9.17749 15.485L5.32999 17.5083C5.25694 17.547 5.17449 17.5644 5.09204 17.5585C5.00958 17.5527 4.93043 17.5238 4.86357 17.4752C4.79672 17.4266 4.74485 17.3601 4.71387 17.2835C4.68289 17.2069 4.67404 17.1231 4.68833 17.0417L5.42249 12.7592C5.47099 12.4764 5.44998 12.1862 5.36128 11.9134C5.27257 11.6406 5.11883 11.3935 4.91333 11.1933L1.79999 8.16249C1.74049 8.10502 1.69832 8.03199 1.6783 7.95172C1.65827 7.87145 1.66119 7.78717 1.68673 7.70849C1.71226 7.6298 1.75938 7.55986 1.82272 7.50665C1.88607 7.45343 1.96308 7.41907 2.04499 7.40749L6.34916 6.77833C6.63271 6.73708 6.90199 6.62754 7.13381 6.45915C7.36564 6.29076 7.55308 6.06855 7.67999 5.81166L9.60416 1.91249Z"
+            fill="#C9972A" stroke="#C9972A" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round" />
+        </svg></div>
+      <div class="star right"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"
+          fill="none">
+          <path
+            d="M9.60416 1.91249C9.64068 1.83871 9.69709 1.7766 9.76704 1.73318C9.83698 1.68976 9.91767 1.66675 9.99999 1.66675C10.0823 1.66675 10.163 1.68976 10.233 1.73318C10.3029 1.7766 10.3593 1.83871 10.3958 1.91249L12.3208 5.81166C12.4476 6.0683 12.6348 6.29033 12.8663 6.4587C13.0979 6.62707 13.3668 6.73675 13.65 6.77833L17.955 7.40833C18.0366 7.42015 18.1132 7.45455 18.1762 7.50766C18.2393 7.56076 18.2862 7.63045 18.3117 7.70883C18.3372 7.78721 18.3402 7.87116 18.3205 7.95119C18.3007 8.03121 18.259 8.10412 18.2 8.16166L15.0867 11.1933C14.8813 11.3934 14.7277 11.6404 14.639 11.913C14.5503 12.1856 14.5292 12.4757 14.5775 12.7583L15.3125 17.0417C15.3269 17.1232 15.3181 17.2071 15.2871 17.2839C15.2561 17.3607 15.2041 17.4272 15.1371 17.4758C15.0701 17.5245 14.9908 17.5533 14.9082 17.5591C14.8256 17.5648 14.7431 17.5472 14.67 17.5083L10.8217 15.485C10.5681 15.3518 10.286 15.2823 9.99958 15.2823C9.71318 15.2823 9.43106 15.3518 9.17749 15.485L5.32999 17.5083C5.25694 17.547 5.17449 17.5644 5.09204 17.5585C5.00958 17.5527 4.93043 17.5238 4.86357 17.4752C4.79672 17.4266 4.74485 17.3601 4.71387 17.2835C4.68289 17.2069 4.67404 17.1231 4.68833 17.0417L5.42249 12.7592C5.47099 12.4764 5.44998 12.1862 5.36128 11.9134C5.27257 11.6406 5.11883 11.3935 4.91333 11.1933L1.79999 8.16249C1.74049 8.10502 1.69832 8.03199 1.6783 7.95172C1.65827 7.87145 1.66119 7.78717 1.68673 7.70849C1.71226 7.6298 1.75938 7.55986 1.82272 7.50665C1.88607 7.45343 1.96308 7.41907 2.04499 7.40749L6.34916 6.77833C6.63271 6.73708 6.90199 6.62754 7.13381 6.45915C7.36564 6.29076 7.55308 6.06855 7.67999 5.81166L9.60416 1.91249Z"
+            fill="#C9972A" stroke="#C9972A" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round" />
+        </svg></div>
+
+      <main class="page">
+        <div class="ribbon">
+          <span class="line"></span>
+          <span>Philippine National Hero</span>
+          <span class="line"></span>
+        </div>
+
+        <header class="hero">
+          <div class="flourish left"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"
+              fill="none">
+              <g opacity="0.3">
+                <path
+                  d="M16.8933 25.3333C17.2441 25.3333 17.5914 25.264 17.9154 25.1294C18.2394 24.9949 18.5336 24.7978 18.7813 24.5493L26.9866 16.32C28.4878 14.8189 29.3311 12.7829 29.3311 10.66C29.3311 8.53709 28.4878 6.50113 26.9866 5C25.4855 3.49888 23.4495 2.65555 21.3266 2.65555C19.2037 2.65555 17.1678 3.49888 15.6666 5L7.44796 13.2187C6.94783 13.7186 6.66678 14.3968 6.66663 15.104V24C6.66663 24.3536 6.8071 24.6928 7.05715 24.9428C7.3072 25.1929 7.64634 25.3333 7.99996 25.3333H16.8933Z"
+                  stroke="#C9972A" stroke-width="2.66667" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M21.3333 10.6667L2.66663 29.3333" stroke="#C9972A" stroke-width="2.66667"
+                  stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M23.3333 20H12" stroke="#C9972A" stroke-width="2.66667" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </g>
+            </svg></div>
+          <div class="flourish right"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"
+              fill="none">
+              <g opacity="0.3">
+                <path
+                  d="M16.8933 25.3333C17.2441 25.3333 17.5914 25.264 17.9154 25.1294C18.2394 24.9949 18.5336 24.7978 18.7813 24.5493L26.9866 16.32C28.4878 14.8189 29.3311 12.7829 29.3311 10.66C29.3311 8.53709 28.4878 6.50113 26.9866 5C25.4855 3.49888 23.4495 2.65555 21.3266 2.65555C19.2037 2.65555 17.1678 3.49888 15.6666 5L7.44796 13.2187C6.94783 13.7186 6.66678 14.3968 6.66663 15.104V24C6.66663 24.3536 6.8071 24.6928 7.05715 24.9428C7.3072 25.1929 7.64634 25.3333 7.99996 25.3333H16.8933Z"
+                  stroke="#C9972A" stroke-width="2.66667" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M21.3333 10.6667L2.66663 29.3333" stroke="#C9972A" stroke-width="2.66667"
+                  stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M23.3333 20H12" stroke="#C9972A" stroke-width="2.66667" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </g>
+            </svg></div>
+          <h1>José <em>Rizal</em></h1>
+          <div class="dates">June 19, 1861 — December 30, 1896</div>
+        </header>
+
+        <nav class="tabs">
+          <button class="tab active" data-tab="about">
+            <span class="ico">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 6v12"></path>
+                <path d="M12 6c-2-1.5-6-1.5-8 0v12c2-1.5 6-1.5 8 0"></path>
+                <path d="M12 6c2-1.5 6-1.5 8 0v12c-2-1.5-6-1.5-8 0"></path>
+              </svg>
+            </span>
+            <span>About</span>
+          </button>
+
+          <button class="tab" data-tab="life-story">
+            <span class="ico">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path
+                  d="M12.6666 9.33333C13.66 8.36 14.6666 7.19333 14.6666 5.66667C14.6666 4.69421 14.2803 3.76158 13.5927 3.07394C12.9051 2.38631 11.9724 2 11 2C9.82665 2 8.99998 2.33333 7.99998 3.33333C6.99998 2.33333 6.17331 2 4.99998 2C4.02752 2 3.09489 2.38631 2.40725 3.07394C1.71962 3.76158 1.33331 4.69421 1.33331 5.66667C1.33331 7.2 2.33331 8.36667 3.33331 9.33333L7.99998 14L12.6666 9.33333Z"
+                  stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </span>
+            <span>Life Story</span>
+          </button>
+
+          <button class="tab" data-tab="family">
+            <span class="ico">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path
+                  d="M12.6666 9.33333C13.66 8.36 14.6666 7.19333 14.6666 5.66667C14.6666 4.69421 14.2803 3.76158 13.5927 3.07394C12.9051 2.38631 11.9724 2 11 2C9.82665 2 8.99998 2.33333 7.99998 3.33333C6.99998 2.33333 6.17331 2 4.99998 2C4.02752 2 3.09489 2.38631 2.40725 3.07394C1.71962 3.76158 1.33331 4.69421 1.33331 5.66667C1.33331 7.2 2.33331 8.36667 3.33331 9.33333L7.99998 14L12.6666 9.33333Z"
+                  stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </span>
+            <span>Family</span>
+          </button>
+
+          <button class="tab" data-tab="works">
+            <span class="ico">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <g clip-path="url(#clip0_works)">
+                  <path
+                    d="M8.44665 12.6667C8.62205 12.6666 8.79571 12.632 8.9577 12.5647C9.11969 12.4975 9.26681 12.3989 9.39065 12.2747L13.4933 8.16C14.2439 7.40944 14.6655 6.39145 14.6655 5.33C14.6655 4.26854 14.2439 3.25056 13.4933 2.5C12.7428 1.74944 11.7248 1.32777 10.6633 1.32777C9.60186 1.32777 8.58388 1.74944 7.83331 2.5L3.72398 6.60933C3.47391 6.85932 3.33339 7.19841 3.33331 7.552V12C3.33331 12.1768 3.40355 12.3464 3.52858 12.4714C3.6536 12.5964 3.82317 12.6667 3.99998 12.6667H8.44665Z"
+                    stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M10.6666 5.33334L1.33331 14.6667" stroke="currentColor" stroke-width="1.33333"
+                    stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M11.6667 10H6" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                </g>
+                <defs>
+                  <clipPath id="clip0_works">
+                    <rect width="16" height="16" fill="white" />
+                  </clipPath>
+                </defs>
+              </svg>
+            </span>
+            <span>Works</span>
+          </button>
+
+          <button class="tab" data-tab="legacy">
+            <span class="ico">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <g clip-path="url(#clip0_legacy)">
+                  <path
+                    d="M10.318 8.59334L11.328 14.2773C11.3393 14.3443 11.3299 14.4131 11.3011 14.4745C11.2723 14.536 11.2253 14.5871 11.1666 14.6212C11.1079 14.6553 11.0402 14.6706 10.9726 14.6651C10.9049 14.6597 10.8405 14.6337 10.788 14.5907L8.40135 12.7993C8.28613 12.7133 8.14617 12.6668 8.00235 12.6668C7.85853 12.6668 7.71857 12.7133 7.60335 12.7993L5.21268 14.59C5.16023 14.633 5.09593 14.6589 5.02835 14.6644C4.96077 14.6698 4.89313 14.6546 4.83446 14.6206C4.77579 14.5866 4.72887 14.5356 4.69996 14.4742C4.67106 14.4129 4.66154 14.3442 4.67268 14.2773L5.68202 8.59334"
+                    stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round" />
+                  <path
+                    d="M8 9.33334C10.2091 9.33334 12 7.54248 12 5.33334C12 3.1242 10.2091 1.33334 8 1.33334C5.79086 1.33334 4 3.1242 4 5.33334C4 7.54248 5.79086 9.33334 8 9.33334Z"
+                    stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round" />
+                </g>
+                <defs>
+                  <clipPath id="clip0_legacy">
+                    <rect width="16" height="16" fill="white" />
+                  </clipPath>
+                </defs>
+              </svg>
+            </span>
+            <span>Legacy</span>
+          </button>
+
+          <button class="tab" data-tab="gallery">
+            <span class="ico">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <g clip-path="url(#clip0_gallery)">
+                  <path
+                    d="M8.00001 14.6667C11.6819 14.6667 14.6667 11.6819 14.6667 8C14.6667 4.3181 11.6819 1.33334 8.00001 1.33334C4.31811 1.33334 1.33334 4.3181 1.33334 8C1.33334 11.6819 4.31811 14.6667 8.00001 14.6667Z"
+                    stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round" />
+                  <path
+                    d="M8.00001 1.33334C6.28817 3.13077 5.33334 5.51783 5.33334 8C5.33334 10.4822 6.28817 12.8692 8.00001 14.6667C9.71185 12.8692 10.6667 10.4822 10.6667 8C10.6667 5.51783 9.71185 3.13077 8.00001 1.33334Z"
+                    stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M1.33334 8H14.6667" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                </g>
+                <defs>
+                  <clipPath id="clip0_gallery">
+                    <rect width="16" height="16" fill="white" />
+                  </clipPath>
+                </defs>
+              </svg>
+            </span>
+            <span>Gallery</span>
+          </button>
+
+        </nav>
+
+        <section id="about" class="tab-section active">
+          <section class="content">
+            <div class="left-col">
+              <div class="portrait-card">
+                <div class="portrait-frame">
+                  <img src="rizal picture.png" alt="José Rizal Portrait">
+                </div>
+                <div class="portrait-caption">
+                  <div class="name">Dr. José Protasio Rizal</div>
+                  <div class="sub">Photograph circa 1890</div>
+                </div>
+              </div>
+
+              <div class="facts">
+                <h3><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path
+                      d="M7.68335 1.52997C7.71257 1.47094 7.7577 1.42126 7.81365 1.38652C7.86961 1.35178 7.93416 1.33337 8.00002 1.33337C8.06588 1.33337 8.13043 1.35178 8.18639 1.38652C8.24234 1.42126 8.28747 1.47094 8.31669 1.52997L9.85669 4.6493C9.95814 4.85461 10.1079 5.03224 10.2931 5.16694C10.4783 5.30164 10.6934 5.38938 10.92 5.42264L14.364 5.92664C14.4293 5.93609 14.4906 5.96362 14.541 6.0061C14.5914 6.04859 14.629 6.10434 14.6494 6.16704C14.6698 6.22975 14.6722 6.29691 14.6564 6.36093C14.6406 6.42495 14.6072 6.48327 14.56 6.5293L12.0694 8.95464C11.9051 9.1147 11.7822 9.31229 11.7112 9.53039C11.6403 9.74849 11.6234 9.98056 11.662 10.2066L12.25 13.6333C12.2615 13.6985 12.2545 13.7657 12.2297 13.8271C12.2049 13.8885 12.1633 13.9417 12.1097 13.9806C12.0561 14.0196 11.9927 14.0426 11.9266 14.0472C11.8605 14.0518 11.7945 14.0378 11.736 14.0066L8.65735 12.388C8.4545 12.2815 8.22881 12.2258 7.99969 12.2258C7.77057 12.2258 7.54487 12.2815 7.34202 12.388L4.26402 14.0066C4.20557 14.0376 4.13962 14.0515 4.07365 14.0468C4.00769 14.0421 3.94437 14.019 3.89088 13.9801C3.8374 13.9412 3.79591 13.8881 3.77112 13.8268C3.74634 13.7655 3.73926 13.6984 3.75069 13.6333L4.33802 10.2073C4.37682 9.98112 4.36001 9.7489 4.28905 9.53067C4.21808 9.31243 4.09509 9.11474 3.93069 8.95464L1.44002 6.52997C1.39242 6.48399 1.35868 6.42557 1.34266 6.36135C1.32664 6.29714 1.32898 6.22971 1.34941 6.16676C1.36983 6.10381 1.40753 6.04786 1.4582 6.00529C1.50888 5.96272 1.57049 5.93524 1.63602 5.92597L5.07935 5.42264C5.30619 5.38964 5.52161 5.30201 5.70708 5.16729C5.89254 5.03258 6.04249 4.85482 6.14402 4.6493L7.68335 1.52997Z"
+                      fill="#C9972A" stroke="#C9972A" stroke-width="1.33333" stroke-linecap="round"
+                      stroke-linejoin="round" />
+                  </svg> Quick Facts</h3>
+                <div class="fact-row"><span class="label">Born:</span><span class="value">Calamba, Laguna</span></div>
+                <div class="fact-row"><span class="label">Died:</span><span class="value">Manila (Bagumbayan)</span>
+                </div>
+                <div class="fact-row"><span class="label">Age:</span><span class="value">35 years</span></div>
+                <div class="fact-row"><span class="label">Languages:</span><span class="value">22+</span></div>
+                <div class="fact-row"><span class="label">Profession:</span><span class="value">Polymath</span></div>
+              </div>
+            </div>
+
+            <div class="right-col">
+              <article class="about">
+                <h2>About</h2>
+                <p><strong>José Protasio Rizal Mercado y Alonso Realonda</strong> was a Filipino nationalist, writer,
+                  and polymath during the tail end of the Spanish colonial period of the Philippines. He is considered
+                  the
+                  national hero of the Philippines.</p>
+                <p>An ophthalmologist by profession, Rizal became a writer and a key member of the Filipino Propaganda
+                  Movement, which advocated political reforms for the colony under Spain. He was executed by the Spanish
+                  colonial government for the crime of rebellion after the Philippine Revolution, inspired in part by
+                  his writings, broke out.</p>
+                <div class="quote">“He who does not know how to look back at where he came from will never get to his
+                  destination.”</div>
+                <p>Though he never called for violent revolution, his death made him a martyr to the cause of Philippine
+                  independence. Today, Rizal is remembered for his literary works, his advocacy for peaceful reform, and
+                  his ultimate sacrifice for his beloved homeland.</p>
+              </article>
+
+              <div class="features">
+                <div class="feature">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <path d="M16 9.33331V28" stroke="#C9972A" stroke-width="2.66667" stroke-linecap="round"
+                      stroke-linejoin="round" />
+                    <path
+                      d="M4.00002 24C3.6464 24 3.30726 23.8595 3.05721 23.6095C2.80716 23.3594 2.66669 23.0203 2.66669 22.6667V5.33333C2.66669 4.97971 2.80716 4.64057 3.05721 4.39052C3.30726 4.14048 3.6464 4 4.00002 4H10.6667C12.0812 4 13.4377 4.5619 14.4379 5.5621C15.4381 6.56229 16 7.91885 16 9.33333C16 7.91885 16.5619 6.56229 17.5621 5.5621C18.5623 4.5619 19.9189 4 21.3334 4H28C28.3536 4 28.6928 4.14048 28.9428 4.39052C29.1929 4.64057 29.3334 4.97971 29.3334 5.33333V22.6667C29.3334 23.0203 29.1929 23.3594 28.9428 23.6095C28.6928 23.8595 28.3536 24 28 24H20C18.9392 24 17.9217 24.4214 17.1716 25.1716C16.4214 25.9217 16 26.9391 16 28C16 26.9391 15.5786 25.9217 14.8284 25.1716C14.0783 24.4214 13.0609 24 12 24H4.00002Z"
+                      stroke="#C9972A" stroke-width="2.66667" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                  <div class="title">Novelist &amp; Poet</div>
+                  <div class="desc">Authored Noli Me Tángere &amp; El Filibusterismo</div>
+                </div>
+
+                <div class="feature">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <path
+                      d="M16 29.3334C23.3638 29.3334 29.3333 23.3638 29.3333 16C29.3333 8.63622 23.3638 2.66669 16 2.66669C8.63619 2.66669 2.66666 8.63622 2.66666 16C2.66666 23.3638 8.63619 29.3334 16 29.3334Z"
+                      stroke="#C9972A" stroke-width="2.66667" stroke-linecap="round" stroke-linejoin="round" />
+                    <path
+                      d="M16 2.66669C12.5763 6.26156 10.6667 11.0357 10.6667 16C10.6667 20.9644 12.5763 25.7385 16 29.3334C19.4237 25.7385 21.3333 20.9644 21.3333 16C21.3333 11.0357 19.4237 6.26156 16 2.66669Z"
+                      stroke="#C9972A" stroke-width="2.66667" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M2.66666 16H29.3333" stroke="#C9972A" stroke-width="2.66667" stroke-linecap="round"
+                      stroke-linejoin="round" />
+                  </svg>
+                  <div class="title">Polyglot</div>
+                  <div class="desc">Fluent in 22+ languages</div>
+                </div>
+
+                <div class="feature">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <path
+                      d="M20.636 17.1866L22.656 28.5546C22.6786 28.6885 22.6598 28.8261 22.6021 28.949C22.5445 29.0719 22.4506 29.1742 22.3332 29.2424C22.2158 29.3105 22.0804 29.3412 21.945 29.3303C21.8097 29.3193 21.681 29.2674 21.576 29.1813L16.8026 25.5986C16.5722 25.4265 16.2923 25.3335 16.0046 25.3335C15.717 25.3335 15.4371 25.4265 15.2066 25.5986L10.4253 29.18C10.3204 29.2659 10.1918 29.3178 10.0566 29.3287C9.92148 29.3396 9.7862 29.3091 9.66886 29.2411C9.55151 29.1732 9.45767 29.0711 9.39987 28.9484C9.34206 28.8258 9.32302 28.6884 9.34531 28.5546L11.364 17.1866"
+                      stroke="#C9972A" stroke-width="2.66667" stroke-linecap="round" stroke-linejoin="round" />
+                    <path
+                      d="M16 18.6667C20.4183 18.6667 24 15.085 24 10.6667C24 6.24841 20.4183 2.66669 16 2.66669C11.5817 2.66669 8 6.24841 8 10.6667C8 15.085 11.5817 18.6667 16 18.6667Z"
+                      stroke="#C9972A" stroke-width="2.66667" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                  <div class="title">Ophthalmologist</div>
+                  <div class="desc">Licensed medical doctor</div>
+                </div>
+
+                <div class="feature">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <path
+                      d="M16.8933 25.3334C17.2441 25.3333 17.5915 25.264 17.9154 25.1295C18.2394 24.9949 18.5337 24.7978 18.7813 24.5494L26.9867 16.32C28.4878 14.8189 29.3311 12.7829 29.3311 10.66C29.3311 8.53712 28.4878 6.50115 26.9867 5.00003C25.4855 3.4989 23.4496 2.65558 21.3267 2.65558C19.2037 2.65558 17.1678 3.4989 15.6667 5.00003L7.44799 13.2187C6.94786 13.7187 6.66681 14.3968 6.66666 15.104V24C6.66666 24.3537 6.80713 24.6928 7.05718 24.9428C7.30723 25.1929 7.64637 25.3334 7.99999 25.3334H16.8933Z"
+                      stroke="#C9972A" stroke-width="2.66667" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M21.3333 10.6667L2.66666 29.3334" stroke="#C9972A" stroke-width="2.66667"
+                      stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M23.3333 20H12" stroke="#C9972A" stroke-width="2.66667" stroke-linecap="round"
+                      stroke-linejoin="round" />
+                  </svg>
+                  <div class="title">Reformist</div>
+                  <div class="desc">Founded La Liga Filipina</div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </section>
+
+        <section id="life-story" class="tab-section">
+          <div class="life-story-wrap">
+
+            <!-- TITLE -->
+            <h2 class="life-story-title">A Life of Courage and Brilliance</h2>
+            <div class="life-story-divider"></div>
+
+            <!-- GRID CARDS (TOP PART) -->
+            <div class="life-grid">
+
+              <div class="life-box">
+                <span class="life-number">01</span>
+                <div class="life-label">EARLY LIFE · 1861–1877</div>
+                <h3>Born in Calamba</h3>
+                <p>
+                  José Protacio Rizal Mercado y Alonso Realonda was born on June 19, 1861, in Calamba, Laguna, the
+                  seventh of eleven children. His father, Francisco Rizal Mercado, was a prosperous farmer; his mother,
+                  Teodora Alonso, was an educated woman who nurtured his love of learning. By age 8, he had already
+                  written his first poem in Tagalog.
+                </p>
+              </div>
+
+              <div class="life-box">
+                <span class="life-number">02</span>
+                <div class="life-label">EDUCATION · 1877–1882</div>
+                <h3>Scholar in Manila</h3>
+                <p>
+                  Rizal entered the Ateneo Municipal de Manila at age 11, earning a Bachelor of Arts with the highest
+                  honors. He then studied at the University of Santo Tomas, pursuing medicine with the goal of curing
+                  his mother's worsening eyesight. Finding the friars' teaching backward, he resolved to continue his
+                  studies in Europe.
+                </p>
+              </div>
+
+              <div class="life-box">
+                <span class="life-number">03</span>
+                <div class="life-label">EUROPE & WORKS · 1882–1892</div>
+                <h3>Reformist in Exile</h3>
+                <p>
+                  In Madrid, Rizal finished his degree in medicine and philosophy. He traveled through Spain, France,
+                  Germany, Austria, and Switzerland — learning ophthalmology under Dr. Otto Becker in Heidelberg. During
+                  this decade, he wrote his landmark novels Noli Me Tángere (1887) and El Filibusterismo (1891), which
+                  electrified the Filipino reform movement.
+                </p>
+              </div>
+
+              <div class="life-box">
+                <span class="life-number">04</span>
+                <div class="life-label">EXILE · 1892–1896</div>
+                <h3>Dapitan and Bagumbayan</h3>
+                <p>
+                  Returning to the Philippines in 1892, Rizal founded La Liga Filipina — a civic organization for
+                  peaceful reform — and was swiftly arrested and exiled to Dapitan, Mindanao. There he practiced
+                  medicine, taught, built infrastructure, and continued writing. After four years, he was arrested on
+                  charges of rebellion and executed by firing squad on December 30, 1896, at Bagumbayan (now Rizal
+                  Park), aged 35.
+                </p>
+              </div>
+
+            </div>
+
+            <!-- TIMELINE (BOTTOM PART) -->
+            <div class="timeline-section">
+              <h2 class="timeline-title">A Life in <em>Time</em></h2>
+
+              <div class="timeline">
+
+                <div class="timeline-item">
+                  <div class="year">1861</div>
+                  <div class="timeline-content">
+                    <h3>Born in Calamba, Laguna</h3>
+                    <p>José Protasio Rizal Mercado y Alonso Realonda is born on June 19.</p>
+                  </div>
+                </div>
+
+                <div class="timeline-item">
+                  <div class="year">1872</div>
+                  <div class="timeline-content">
+                    <h3>Enters Ateneo de Manila</h3>
+                    <p>Begins studies, graduating with highest honors years later.</p>
+                  </div>
+                </div>
+
+                <div class="timeline-item">
+                  <div class="year">1877</div>
+                  <div class="timeline-content">
+                    <h3>University of Santo Tomas</h3>
+                    <p>Pursues medicine; grows frustrated with colonial education system.</p>
+                  </div>
+                </div>
+
+                <div class="timeline-item">
+                  <div class="year">1882</div>
+                  <div class="timeline-content">
+                    <h3>Studies in Madrid, Spain</h3>
+                    <p>Secretly leaves for Europe to complete his medical degree.</p>
+                  </div>
+                </div>
+
+                <div class="timeline-item">
+                  <div class="year">1884</div>
+                  <div class="timeline-content">
+                    <h3>Doctor of Medicine &amp; Philosophy</h3>
+                    <p>Earns degrees from Universidad Central de Madrid with top marks.</p>
+                  </div>
+                </div>
+
+                <div class="timeline-item">
+                  <div class="year">1887</div>
+                  <div class="timeline-content">
+                    <h3>Noli Me Tángere Published</h3>
+                    <p>His groundbreaking novel published in Berlin exposes colonial abuses and shocks Spanish
+                      authorities.</p>
+                  </div>
+                </div>
+
+                <div class="timeline-item">
+                  <div class="year">1891</div>
+                  <div class="timeline-content">
+                    <h3>El Filibusterismo Published</h3>
+                    <p>The darker, revolutionary sequel published in Ghent, Belgium.</p>
+                  </div>
+                </div>
+
+                <div class="timeline-item">
+                  <div class="year">1892</div>
+                  <div class="timeline-content">
+                    <h3>La Liga Filipina Founded &amp; Exile</h3>
+                    <p>Returns to Manila, founds a civic society, then is arrested and exiled to Dapitan, Mindanao.</p>
+                  </div>
+                </div>
+
+                <div class="timeline-item">
+                  <div class="year">1896</div>
+                  <div class="timeline-content">
+                    <h3>Mi Último Adiós Written</h3>
+                    <p>Writes his final poem the night before his execution, hidden inside an oil lamp.</p>
+                  </div>
+                </div>
+
+                <div class="timeline-item">
+                  <div class="year">Dec 30,<br>1896</div>
+                  <div class="timeline-content">
+                    <h3>Executed at Bagumbayan</h3>
+                    <p>Shot at dawn at Luneta, Manila. His death fueled the Philippine Revolution and cemented his
+                      legacy as national hero.</p>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+        </section>
+
+
+        <section id="family" class="tab-section">
+          <div class="family-wrap">
+
+            <h2 class="family-title">The Rizal Family</h2>
+            <div class="family-divider"></div>
+
+            <!-- INTRO BOX -->
+            <div class="family-intro">
+              <p>
+                José Rizal came from a prosperous and educated family in Calamba, Laguna.
+                His parents instilled in him a love for learning, culture, and the Filipino people.
+                He was the seventh of eleven children in a family that valued education and intellectual pursuits.
+              </p>
+
+              <div class="family-image-box">
+                <img src="rizal family tree.png" alt="Rizal Family Portrait">
+              </div>
+            </div>
+
+            <!-- PARENTS -->
+            <div class="family-grid">
+
+              <!-- FATHER -->
+              <div class="family-card">
+                <h3 class="family-heading">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path
+                      d="M9.60416 1.91249C9.64068 1.83871 9.69709 1.7766 9.76704 1.73318C9.83698 1.68976 9.91767 1.66675 9.99999 1.66675C10.0823 1.66675 10.163 1.68976 10.233 1.73318C10.3029 1.7766 10.3593 1.83871 10.3958 1.91249L12.3208 5.81166C12.4476 6.0683 12.6348 6.29033 12.8663 6.4587C13.0979 6.62707 13.3668 6.73675 13.65 6.77833L17.955 7.40833C18.0366 7.42015 18.1132 7.45455 18.1762 7.50766C18.2393 7.56076 18.2862 7.63045 18.3117 7.70883C18.3372 7.78721 18.3402 7.87116 18.3205 7.95119C18.3007 8.03121 18.259 8.10412 18.2 8.16166L15.0867 11.1933C14.8813 11.3934 14.7277 11.6404 14.639 11.913C14.5503 12.1856 14.5292 12.4757 14.5775 12.7583L15.3125 17.0417C15.3269 17.1232 15.3181 17.2071 15.2871 17.2839C15.2561 17.3607 15.2041 17.4272 15.1371 17.4758C15.0701 17.5245 14.9908 17.5533 14.9082 17.5591C14.8256 17.5648 14.7431 17.5472 14.67 17.5083L10.8217 15.485C10.5681 15.3518 10.286 15.2823 9.99958 15.2823C9.71318 15.2823 9.43106 15.3518 9.17749 15.485L5.32999 17.5083C5.25694 17.547 5.17449 17.5644 5.09204 17.5585C5.00958 17.5527 4.93043 17.5238 4.86357 17.4752C4.79672 17.4266 4.74485 17.3601 4.71387 17.2835C4.68289 17.2069 4.67404 17.1231 4.68833 17.0417L5.42249 12.7592C5.47099 12.4764 5.44998 12.1862 5.36128 11.9134C5.27257 11.6406 5.11883 11.3935 4.91333 11.1933L1.79999 8.16249C1.74049 8.10502 1.69832 8.03199 1.6783 7.95172C1.65827 7.87145 1.66119 7.78717 1.68673 7.70849C1.71226 7.6298 1.75938 7.55986 1.82272 7.50665C1.88607 7.45343 1.96308 7.41907 2.04499 7.40749L6.34916 6.77833C6.63271 6.73708 6.90199 6.62754 7.13381 6.45915C7.36564 6.29076 7.55308 6.06855 7.67999 5.81166L9.60416 1.91249Z"
+                      fill="#C9972A" stroke="#C9972A" stroke-width="1.66667" stroke-linecap="round"
+                      stroke-linejoin="round" />
+                  </svg>
+                  Francisco Mercado Rizal
+                </h3>
+                <div class="role">FATHER (1818-1898)</div>
+                <p>
+                  A prosperous farmer and the town's wealthiest man. Francisco was a graduate of the Colegio de San José
+                  in Manila.
+                  He was known for his business acumen and was able to provide his children with excellent education.
+                  He supported José's studies in Europe despite the risks involved.
+                </p>
+              </div>
+
+              <!-- MOTHER -->
+              <div class="family-card">
+                <h3 class="family-heading">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path
+                      d="M9.60416 1.91249C9.64068 1.83871 9.69709 1.7766 9.76704 1.73318C9.83698 1.68976 9.91767 1.66675 9.99999 1.66675C10.0823 1.66675 10.163 1.68976 10.233 1.73318C10.3029 1.7766 10.3593 1.83871 10.3958 1.91249L12.3208 5.81166C12.4476 6.0683 12.6348 6.29033 12.8663 6.4587C13.0979 6.62707 13.3668 6.73675 13.65 6.77833L17.955 7.40833C18.0366 7.42015 18.1132 7.45455 18.1762 7.50766C18.2393 7.56076 18.2862 7.63045 18.3117 7.70883C18.3372 7.78721 18.3402 7.87116 18.3205 7.95119C18.3007 8.03121 18.259 8.10412 18.2 8.16166L15.0867 11.1933C14.8813 11.3934 14.7277 11.6404 14.639 11.913C14.5503 12.1856 14.5292 12.4757 14.5775 12.7583L15.3125 17.0417C15.3269 17.1232 15.3181 17.2071 15.2871 17.2839C15.2561 17.3607 15.2041 17.4272 15.1371 17.4758C15.0701 17.5245 14.9908 17.5533 14.9082 17.5591C14.8256 17.5648 14.7431 17.5472 14.67 17.5083L10.8217 15.485C10.5681 15.3518 10.286 15.2823 9.99958 15.2823C9.71318 15.2823 9.43106 15.3518 9.17749 15.485L5.32999 17.5083C5.25694 17.547 5.17449 17.5644 5.09204 17.5585C5.00958 17.5527 4.93043 17.5238 4.86357 17.4752C4.79672 17.4266 4.74485 17.3601 4.71387 17.2835C4.68289 17.2069 4.67404 17.1231 4.68833 17.0417L5.42249 12.7592C5.47099 12.4764 5.44998 12.1862 5.36128 11.9134C5.27257 11.6406 5.11883 11.3935 4.91333 11.1933L1.79999 8.16249C1.74049 8.10502 1.69832 8.03199 1.6783 7.95172C1.65827 7.87145 1.66119 7.78717 1.68673 7.70849C1.71226 7.6298 1.75938 7.55986 1.82272 7.50665C1.88607 7.45343 1.96308 7.41907 2.04499 7.40749L6.34916 6.77833C6.63271 6.73708 6.90199 6.62754 7.13381 6.45915C7.36564 6.29076 7.55308 6.06855 7.67999 5.81166L9.60416 1.91249Z"
+                      fill="#C9972A" stroke="#C9972A" stroke-width="1.66667" stroke-linecap="round"
+                      stroke-linejoin="round" />
+                  </svg>
+                  Teodora Alonso Realonda
+                </h3>
+                <div class="role">MOTHER (1827-1911)</div>
+                <p>
+                  An educated and cultured woman who was José's first teacher. She taught him to read and write,
+                  and nurtured his love for poetry and the arts. Despite being imprisoned for two years on false
+                  charges,
+                  she remained a pillar of strength for the family. José's deep devotion to her influenced his decision
+                  to study ophthalmology to cure her failing eyesight.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="siblings-section">
+            <h2 class="siblings-title">The Eleven Siblings</h2>
+            <div class="siblings-divider"></div>
+
+            <div class="siblings-grid">
+              <div class="siblings-column">
+                <div class="sibling-item">
+                  <h3>Saturnina Rizal</h3>
+                  <div class="sibling-meta">"Neneng" • 1850-1913</div>
+                  <p>The eldest child. She married Manuel Hidalgo and was known for her strong character.</p>
+                </div>
+
+                <div class="sibling-item">
+                  <h3>Narcisa Rizal</h3>
+                  <div class="sibling-meta">"Sisa" • 1852-1939</div>
+                  <p>A teacher and the one who took care of their mother. She was present at José's execution and
+                    retrieved his last poem "Mi Último Adiós" from the oil lamp.</p>
+                </div>
+
+                <div class="sibling-item">
+                  <h3>Lucia Rizal</h3>
+                  <div class="sibling-meta">"Lucia" • 1857-1919</div>
+                  <p>Married Mariano Herbosa. Her husband died of cholera because Spanish friars refused him Catholic
+                    burial.</p>
+                </div>
+
+                <div class="sibling-item">
+                  <h3>José Rizal</h3>
+                  <div class="sibling-meta">"Pepe" • 1861-1896</div>
+                  <p>The seventh child and the national hero of the Philippines.</p>
+                </div>
+
+                <div class="sibling-item">
+                  <h3>Josefa Rizal</h3>
+                  <div class="sibling-meta">"Panggoy" • 1865-1945</div>
+                  <p>An epileptic who remained unmarried. She was very close to José and helped in his reform
+                    activities.</p>
+                </div>
+
+                <div class="sibling-item">
+                  <h3>Soledad Rizal</h3>
+                  <div class="sibling-meta">"Choleng" • 1870-1929</div>
+                  <p>The youngest child who married Pantaleon Quintero. She was also very devoted to José.</p>
+                </div>
+              </div>
+
+              <div class="siblings-column">
+                <div class="sibling-item">
+                  <h3>Paciano Rizal</h3>
+                  <div class="sibling-meta">"Paciano" • 1851-1930</div>
+                  <p>José's older brother and closest confidant. He financed José's education and was a revolutionary
+                    general. He sacrificed his own education to support José.</p>
+                </div>
+
+                <div class="sibling-item">
+                  <h3>Olympia Rizal</h3>
+                  <div class="sibling-meta">"Ypia" • 1855-1887</div>
+                  <p>Married Silvestre Ubaldo. She died in 1887, the same year Noli Me Tángere was published.</p>
+                </div>
+
+                <div class="sibling-item">
+                  <h3>Maria Rizal</h3>
+                  <div class="sibling-meta">"Biang" • 1859-1945</div>
+                  <p>Married Daniel Faustino Cruz. She was known for her business acumen and managed the family affairs.
+                  </p>
+                </div>
+
+                <div class="sibling-item">
+                  <h3>Concepcion Rizal</h3>
+                  <div class="sibling-meta">"Concha" • 1862-1865</div>
+                  <p>Died at age three. Her death deeply affected young José and was his first encounter with grief.</p>
+                </div>
+
+                <div class="sibling-item">
+                  <h3>Trinidad Rizal</h3>
+                  <div class="sibling-meta">"Trining" • 1868-1951</div>
+                  <p>The one to whom José entrusted his final poem hidden in an alcohol lamp on the eve of his
+                    execution.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="family-values-section">
+            <h2 class="family-values-title">Family Values &amp; Influence</h2>
+
+            <div class="family-values-grid">
+              <div class="family-value-item">
+                <div class="family-value-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                    viewBox="0 0 24 24" fill="none">
+                    <path
+                      d="M11.525 2.29502C11.5689 2.20648 11.6365 2.13195 11.7205 2.07984C11.8044 2.02773 11.9012 2.00012 12 2.00012C12.0988 2.00012 12.1956 2.02773 12.2796 2.07984C12.3635 2.13195 12.4312 2.20648 12.475 2.29502L14.785 6.97402C14.9372 7.28198 15.1618 7.54842 15.4397 7.75047C15.7175 7.95251 16.0402 8.08413 16.38 8.13402L21.546 8.89002C21.6439 8.9042 21.7359 8.94549 21.8115 9.00921C21.8872 9.07294 21.9435 9.15656 21.974 9.25062C22.0046 9.34468 22.0083 9.44542 21.9846 9.54145C21.9609 9.63748 21.9108 9.72497 21.84 9.79402L18.104 13.432C17.8576 13.6721 17.6733 13.9685 17.5669 14.2956C17.4604 14.6228 17.4351 14.9709 17.493 15.31L18.375 20.45C18.3923 20.5479 18.3817 20.6486 18.3445 20.7407C18.3073 20.8328 18.245 20.9126 18.1646 20.971C18.0842 21.0294 17.989 21.064 17.8899 21.0709C17.7908 21.0778 17.6917 21.0567 17.604 21.01L12.986 18.582C12.6817 18.4222 12.3432 18.3388 11.9995 18.3388C11.6559 18.3388 11.3173 18.4222 11.013 18.582L6.39603 21.01C6.30836 21.0564 6.20943 21.0773 6.11048 21.0703C6.01153 21.0632 5.91655 21.0286 5.83632 20.9702C5.7561 20.9119 5.69386 20.8322 5.65669 20.7402C5.61951 20.6483 5.60889 20.5477 5.62603 20.45L6.50703 15.311C6.56523 14.9717 6.54001 14.6234 6.43357 14.2961C6.32712 13.9687 6.14264 13.6722 5.89603 13.432L2.16003 9.79502C2.08862 9.72605 2.03802 9.63841 2.01399 9.54209C1.98996 9.44577 1.99347 9.34463 2.02411 9.25021C2.05475 9.15578 2.1113 9.07186 2.18731 9.008C2.26332 8.94414 2.35573 8.90291 2.45403 8.88902L7.61903 8.13402C7.95929 8.08451 8.28242 7.95307 8.56061 7.751C8.83881 7.54893 9.06373 7.28229 9.21603 6.97402L11.525 2.29502Z"
+                      fill="#C9972A" stroke="#C9972A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg></div>
+                <h3>Education</h3>
+                <p>
+                  The Rizal family highly valued education. Most of the siblings were well-educated,
+                  and they ensured that all children, including daughters, received proper schooling.
+                </p>
+              </div>
+
+              <div class="family-value-item">
+                <div class="family-value-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                    viewBox="0 0 24 24" fill="none">
+                    <path
+                      d="M11.525 2.29502C11.5689 2.20648 11.6365 2.13195 11.7205 2.07984C11.8044 2.02773 11.9012 2.00012 12 2.00012C12.0988 2.00012 12.1956 2.02773 12.2796 2.07984C12.3635 2.13195 12.4312 2.20648 12.475 2.29502L14.785 6.97402C14.9372 7.28198 15.1618 7.54842 15.4397 7.75047C15.7175 7.95251 16.0402 8.08413 16.38 8.13402L21.546 8.89002C21.6439 8.9042 21.7359 8.94549 21.8115 9.00921C21.8872 9.07294 21.9435 9.15656 21.974 9.25062C22.0046 9.34468 22.0083 9.44542 21.9846 9.54145C21.9609 9.63748 21.9108 9.72497 21.84 9.79402L18.104 13.432C17.8576 13.6721 17.6733 13.9685 17.5669 14.2956C17.4604 14.6228 17.4351 14.9709 17.493 15.31L18.375 20.45C18.3923 20.5479 18.3817 20.6486 18.3445 20.7407C18.3073 20.8328 18.245 20.9126 18.1646 20.971C18.0842 21.0294 17.989 21.064 17.8899 21.0709C17.7908 21.0778 17.6917 21.0567 17.604 21.01L12.986 18.582C12.6817 18.4222 12.3432 18.3388 11.9995 18.3388C11.6559 18.3388 11.3173 18.4222 11.013 18.582L6.39603 21.01C6.30836 21.0564 6.20943 21.0773 6.11048 21.0703C6.01153 21.0632 5.91655 21.0286 5.83632 20.9702C5.7561 20.9119 5.69386 20.8322 5.65669 20.7402C5.61951 20.6483 5.60889 20.5477 5.62603 20.45L6.50703 15.311C6.56523 14.9717 6.54001 14.6234 6.43357 14.2961C6.32712 13.9687 6.14264 13.6722 5.89603 13.432L2.16003 9.79502C2.08862 9.72605 2.03802 9.63841 2.01399 9.54209C1.98996 9.44577 1.99347 9.34463 2.02411 9.25021C2.05475 9.15578 2.1113 9.07186 2.18731 9.008C2.26332 8.94414 2.35573 8.90291 2.45403 8.88902L7.61903 8.13402C7.95929 8.08451 8.28242 7.95307 8.56061 7.751C8.83881 7.54893 9.06373 7.28229 9.21603 6.97402L11.525 2.29502Z"
+                      fill="#C9972A" stroke="#C9972A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg></div>
+                <h3>Patriotism</h3>
+                <p>
+                  The family's love for the Philippines was evident in their support for José's reform
+                  efforts and Paciano's participation in the revolution.
+                </p>
+              </div>
+
+              <div class="family-value-item">
+                <div class="family-value-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                    viewBox="0 0 24 24" fill="none">
+                    <path
+                      d="M11.525 2.29502C11.5689 2.20648 11.6365 2.13195 11.7205 2.07984C11.8044 2.02773 11.9012 2.00012 12 2.00012C12.0988 2.00012 12.1956 2.02773 12.2796 2.07984C12.3635 2.13195 12.4312 2.20648 12.475 2.29502L14.785 6.97402C14.9372 7.28198 15.1618 7.54842 15.4397 7.75047C15.7175 7.95251 16.0402 8.08413 16.38 8.13402L21.546 8.89002C21.6439 8.9042 21.7359 8.94549 21.8115 9.00921C21.8872 9.07294 21.9435 9.15656 21.974 9.25062C22.0046 9.34468 22.0083 9.44542 21.9846 9.54145C21.9609 9.63748 21.9108 9.72497 21.84 9.79402L18.104 13.432C17.8576 13.6721 17.6733 13.9685 17.5669 14.2956C17.4604 14.6228 17.4351 14.9709 17.493 15.31L18.375 20.45C18.3923 20.5479 18.3817 20.6486 18.3445 20.7407C18.3073 20.8328 18.245 20.9126 18.1646 20.971C18.0842 21.0294 17.989 21.064 17.8899 21.0709C17.7908 21.0778 17.6917 21.0567 17.604 21.01L12.986 18.582C12.6817 18.4222 12.3432 18.3388 11.9995 18.3388C11.6559 18.3388 11.3173 18.4222 11.013 18.582L6.39603 21.01C6.30836 21.0564 6.20943 21.0773 6.11048 21.0703C6.01153 21.0632 5.91655 21.0286 5.83632 20.9702C5.7561 20.9119 5.69386 20.8322 5.65669 20.7402C5.61951 20.6483 5.60889 20.5477 5.62603 20.45L6.50703 15.311C6.56523 14.9717 6.54001 14.6234 6.43357 14.2961C6.32712 13.9687 6.14264 13.6722 5.89603 13.432L2.16003 9.79502C2.08862 9.72605 2.03802 9.63841 2.01399 9.54209C1.98996 9.44577 1.99347 9.34463 2.02411 9.25021C2.05475 9.15578 2.1113 9.07186 2.18731 9.008C2.26332 8.94414 2.35573 8.90291 2.45403 8.88902L7.61903 8.13402C7.95929 8.08451 8.28242 7.95307 8.56061 7.751C8.83881 7.54893 9.06373 7.28229 9.21603 6.97402L11.525 2.29502Z"
+                      fill="#C9972A" stroke="#C9972A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg></div>
+                <h3>Faith &amp; Resilience</h3>
+                <p>
+                  Despite persecution and hardships, including Teodora's imprisonment and José's
+                  execution, the family remained united and strong in their convictions.
+                </p>
+              </div>
+            </div>
+          </div>
+
+
+        </section>
+
+        <section id="works" class="tab-section">
+          <div class="works-wrap">
+            <h2 class="works-title">Literary Works</h2>
+            <div class="works-divider"></div>
+
+            <div class="works-grid">
+              <div class="work-card">
+                <div class="work-top brown">
+                  <div class="work-name">Noli Me Tángere</div>
+                  <div class="work-meta">1887 · Berlin, Germany</div>
+                </div>
+                <div class="work-body">
+                  <div class="work-image-frame">
+                    <img src="noli me tangere.png" alt="Noli Me Tangere books">
+                  </div>
+                  <p class="work-text">
+                    His first novel brutally exposed the abuses of Spanish colonial rule and the Catholic friars. The
+                    title,
+                    Latin for "Touch Me Not," follows the idealistic Crisostomo Ibarra confronting systemic injustice.
+                  </p>
+                </div>
+              </div>
+
+              <div class="work-card">
+                <div class="work-top brown">
+                  <div class="work-name">El Filibusterismo</div>
+                  <div class="work-meta">1891 · Ghent, Belgium</div>
+                </div>
+                <div class="work-body">
+                  <div class="work-image-frame">
+                    <img src="el filibusterismo.png" alt="El Filibusterismo book">
+                  </div>
+                  <p class="work-text">
+                    The darker sequel explores themes of revolution and vengeance. Ibarra returns as Simoun, plotting
+                    violent
+                    revolution. Questions whether colonial injustice can be corrected through peaceful means.
+                  </p>
+                </div>
+              </div>
+
+              <div class="work-card">
+                <div class="work-top brown">
+                  <div class="work-name">Mi Último Adiós</div>
+                  <div class="work-meta">1896 · Fort Santiago, Manila</div>
+                </div>
+                <div class="work-body">
+                  <div class="work-image-frame">
+                    <img src="Mi Último Adiós.png" alt="Mi Ultimo Adios books">
+                  </div>
+                  <p class="work-text">
+                    His final poem, written the night before execution and hidden in an oil lamp. "My Last Farewell" is
+                    considered one of the greatest poems in Philippine literature.
+                  </p>
+                </div>
+              </div>
+
+              <div class="work-card">
+                <div class="work-top brown">
+                  <div class="work-name">Essays &amp; Articles</div>
+                  <div class="work-meta">1880-1891 · Various</div>
+                </div>
+                <div class="work-body">
+                  <div class="work-image-frame">
+                    <img src="Essays & Prose Works.png" alt="Essays and articles writing desk">
+                  </div>
+                  <p class="work-text">
+                    Wrote prolifically for La Solidaridad newspaper. Key essays include "Sobre la Indolencia de los
+                    Filipinos"
+                    and "Filipinas Dentro de Cien Años" which prophesied independence.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="legacy" class="tab-section">
+          <div class="legacy-wrap">
+            <h2 class="legacy-title">Enduring Legacy</h2>
+            <div class="legacy-divider"></div>
+
+            <div class="legacy-quote">
+              “The glory of saving a country is not for him who has contributed to its ruin.”
+              <span>— José Rizal, El Filibusterismo</span>
+            </div>
+
+            <div class="legacy-stats">
+              <div class="legacy-box">
+                <div class="legacy-number">22+</div>
+                <div class="legacy-label">LANGUAGES MASTERED</div>
+              </div>
+
+              <div class="legacy-box">
+                <div class="legacy-number">35</div>
+                <div class="legacy-label">AGE AT DEATH</div>
+              </div>
+
+              <div class="legacy-box">
+                <div class="legacy-number">1425</div>
+                <div class="legacy-label">RIZAL LAW (RA)</div>
+              </div>
+
+              <div class="legacy-box">
+                <div class="legacy-number">1896</div>
+                <div class="legacy-label">YEAR OF MARTYRDOM</div>
+              </div>
+            </div>
+
+            <div class="legacy-info">
+              <h3>A Renaissance Man</h3>
+
+              <div class="legacy-grid">
+                <div class="legacy-item">
+                  <strong><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
+                      fill="none">
+                      <path
+                        d="M7.68323 1.52997C7.71245 1.47094 7.75758 1.42126 7.81353 1.38652C7.86949 1.35178 7.93404 1.33337 7.9999 1.33337C8.06576 1.33337 8.13031 1.35178 8.18626 1.38652C8.24222 1.42126 8.28735 1.47094 8.31656 1.52997L9.85656 4.6493C9.95802 4.85461 10.1078 5.03224 10.293 5.16694C10.4782 5.30164 10.6933 5.38938 10.9199 5.42264L14.3639 5.92664C14.4292 5.93609 14.4905 5.96362 14.5409 6.0061C14.5913 6.04859 14.6289 6.10434 14.6492 6.16704C14.6696 6.22975 14.6721 6.29691 14.6563 6.36093C14.6405 6.42495 14.6071 6.48327 14.5599 6.5293L12.0692 8.95464C11.905 9.1147 11.7821 9.31229 11.7111 9.53039C11.6402 9.74849 11.6233 9.98056 11.6619 10.2066L12.2499 13.6333C12.2614 13.6985 12.2544 13.7657 12.2296 13.8271C12.2048 13.8885 12.1632 13.9417 12.1096 13.9806C12.056 14.0196 11.9926 14.0426 11.9265 14.0472C11.8604 14.0518 11.7944 14.0378 11.7359 14.0066L8.65723 12.388C8.45438 12.2815 8.22868 12.2258 7.99956 12.2258C7.77044 12.2258 7.54475 12.2815 7.3419 12.388L4.2639 14.0066C4.20545 14.0376 4.1395 14.0515 4.07353 14.0468C4.00757 14.0421 3.94424 14.019 3.89076 13.9801C3.83728 13.9412 3.79579 13.8881 3.771 13.8268C3.74622 13.7655 3.73914 13.6984 3.75056 13.6333L4.3379 10.2073C4.3767 9.98112 4.35989 9.7489 4.28892 9.53067C4.21796 9.31243 4.09497 9.11474 3.93056 8.95464L1.4399 6.52997C1.39229 6.48399 1.35856 6.42557 1.34254 6.36135C1.32652 6.29714 1.32886 6.22971 1.34928 6.16676C1.36971 6.10381 1.40741 6.04786 1.45808 6.00529C1.50876 5.96272 1.57037 5.93524 1.6359 5.92597L5.07923 5.42264C5.30607 5.38964 5.52149 5.30201 5.70695 5.16729C5.89242 5.03258 6.04237 4.85482 6.1439 4.6493L7.68323 1.52997Z"
+                        fill="#C9972A" stroke="#C9972A" stroke-width="1.33333" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    </svg> Medicine</strong>
+                  <span>Licensed ophthalmologist who practiced in Dapitan</span>
+                </div>
+
+                <div class="legacy-item">
+                  <strong><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
+                      fill="none">
+                      <path
+                        d="M7.68323 1.52997C7.71245 1.47094 7.75758 1.42126 7.81353 1.38652C7.86949 1.35178 7.93404 1.33337 7.9999 1.33337C8.06576 1.33337 8.13031 1.35178 8.18626 1.38652C8.24222 1.42126 8.28735 1.47094 8.31656 1.52997L9.85656 4.6493C9.95802 4.85461 10.1078 5.03224 10.293 5.16694C10.4782 5.30164 10.6933 5.38938 10.9199 5.42264L14.3639 5.92664C14.4292 5.93609 14.4905 5.96362 14.5409 6.0061C14.5913 6.04859 14.6289 6.10434 14.6492 6.16704C14.6696 6.22975 14.6721 6.29691 14.6563 6.36093C14.6405 6.42495 14.6071 6.48327 14.5599 6.5293L12.0692 8.95464C11.905 9.1147 11.7821 9.31229 11.7111 9.53039C11.6402 9.74849 11.6233 9.98056 11.6619 10.2066L12.2499 13.6333C12.2614 13.6985 12.2544 13.7657 12.2296 13.8271C12.2048 13.8885 12.1632 13.9417 12.1096 13.9806C12.056 14.0196 11.9926 14.0426 11.9265 14.0472C11.8604 14.0518 11.7944 14.0378 11.7359 14.0066L8.65723 12.388C8.45438 12.2815 8.22868 12.2258 7.99956 12.2258C7.77044 12.2258 7.54475 12.2815 7.3419 12.388L4.2639 14.0066C4.20545 14.0376 4.1395 14.0515 4.07353 14.0468C4.00757 14.0421 3.94424 14.019 3.89076 13.9801C3.83728 13.9412 3.79579 13.8881 3.771 13.8268C3.74622 13.7655 3.73914 13.6984 3.75056 13.6333L4.3379 10.2073C4.3767 9.98112 4.35989 9.7489 4.28892 9.53067C4.21796 9.31243 4.09497 9.11474 3.93056 8.95464L1.4399 6.52997C1.39229 6.48399 1.35856 6.42557 1.34254 6.36135C1.32652 6.29714 1.32886 6.22971 1.34928 6.16676C1.36971 6.10381 1.40741 6.04786 1.45808 6.00529C1.50876 5.96272 1.57037 5.93524 1.6359 5.92597L5.07923 5.42264C5.30607 5.38964 5.52149 5.30201 5.70695 5.16729C5.89242 5.03258 6.04237 4.85482 6.1439 4.6493L7.68323 1.52997Z"
+                        fill="#C9972A" stroke="#C9972A" stroke-width="1.33333" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    </svg> Literature</strong>
+                  <span>Novelist, poet, and essayist in multiple languages</span>
+                </div>
+
+                <div class="legacy-item">
+                  <strong><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
+                      fill="none">
+                      <path
+                        d="M7.68323 1.52997C7.71245 1.47094 7.75758 1.42126 7.81353 1.38652C7.86949 1.35178 7.93404 1.33337 7.9999 1.33337C8.06576 1.33337 8.13031 1.35178 8.18626 1.38652C8.24222 1.42126 8.28735 1.47094 8.31656 1.52997L9.85656 4.6493C9.95802 4.85461 10.1078 5.03224 10.293 5.16694C10.4782 5.30164 10.6933 5.38938 10.9199 5.42264L14.3639 5.92664C14.4292 5.93609 14.4905 5.96362 14.5409 6.0061C14.5913 6.04859 14.6289 6.10434 14.6492 6.16704C14.6696 6.22975 14.6721 6.29691 14.6563 6.36093C14.6405 6.42495 14.6071 6.48327 14.5599 6.5293L12.0692 8.95464C11.905 9.1147 11.7821 9.31229 11.7111 9.53039C11.6402 9.74849 11.6233 9.98056 11.6619 10.2066L12.2499 13.6333C12.2614 13.6985 12.2544 13.7657 12.2296 13.8271C12.2048 13.8885 12.1632 13.9417 12.1096 13.9806C12.056 14.0196 11.9926 14.0426 11.9265 14.0472C11.8604 14.0518 11.7944 14.0378 11.7359 14.0066L8.65723 12.388C8.45438 12.2815 8.22868 12.2258 7.99956 12.2258C7.77044 12.2258 7.54475 12.2815 7.3419 12.388L4.2639 14.0066C4.20545 14.0376 4.1395 14.0515 4.07353 14.0468C4.00757 14.0421 3.94424 14.019 3.89076 13.9801C3.83728 13.9412 3.79579 13.8881 3.771 13.8268C3.74622 13.7655 3.73914 13.6984 3.75056 13.6333L4.3379 10.2073C4.3767 9.98112 4.35989 9.7489 4.28892 9.53067C4.21796 9.31243 4.09497 9.11474 3.93056 8.95464L1.4399 6.52997C1.39229 6.48399 1.35856 6.42557 1.34254 6.36135C1.32652 6.29714 1.32886 6.22971 1.34928 6.16676C1.36971 6.10381 1.40741 6.04786 1.45808 6.00529C1.50876 5.96272 1.57037 5.93524 1.6359 5.92597L5.07923 5.42264C5.30607 5.38964 5.52149 5.30201 5.70695 5.16729C5.89242 5.03258 6.04237 4.85482 6.1439 4.6493L7.68323 1.52997Z"
+                        fill="#C9972A" stroke="#C9972A" stroke-width="1.33333" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    </svg> Science</strong>
+                  <span>Discovered multiple species, including Draco rizali</span>
+                </div>
+
+                <div class="legacy-item">
+                  <strong><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
+                      fill="none">
+                      <path
+                        d="M7.68323 1.52997C7.71245 1.47094 7.75758 1.42126 7.81353 1.38652C7.86949 1.35178 7.93404 1.33337 7.9999 1.33337C8.06576 1.33337 8.13031 1.35178 8.18626 1.38652C8.24222 1.42126 8.28735 1.47094 8.31656 1.52997L9.85656 4.6493C9.95802 4.85461 10.1078 5.03224 10.293 5.16694C10.4782 5.30164 10.6933 5.38938 10.9199 5.42264L14.3639 5.92664C14.4292 5.93609 14.4905 5.96362 14.5409 6.0061C14.5913 6.04859 14.6289 6.10434 14.6492 6.16704C14.6696 6.22975 14.6721 6.29691 14.6563 6.36093C14.6405 6.42495 14.6071 6.48327 14.5599 6.5293L12.0692 8.95464C11.905 9.1147 11.7821 9.31229 11.7111 9.53039C11.6402 9.74849 11.6233 9.98056 11.6619 10.2066L12.2499 13.6333C12.2614 13.6985 12.2544 13.7657 12.2296 13.8271C12.2048 13.8885 12.1632 13.9417 12.1096 13.9806C12.056 14.0196 11.9926 14.0426 11.9265 14.0472C11.8604 14.0518 11.7944 14.0378 11.7359 14.0066L8.65723 12.388C8.45438 12.2815 8.22868 12.2258 7.99956 12.2258C7.77044 12.2258 7.54475 12.2815 7.3419 12.388L4.2639 14.0066C4.20545 14.0376 4.1395 14.0515 4.07353 14.0468C4.00757 14.0421 3.94424 14.019 3.89076 13.9801C3.83728 13.9412 3.79579 13.8881 3.771 13.8268C3.74622 13.7655 3.73914 13.6984 3.75056 13.6333L4.3379 10.2073C4.3767 9.98112 4.35989 9.7489 4.28892 9.53067C4.21796 9.31243 4.09497 9.11474 3.93056 8.95464L1.4399 6.52997C1.39229 6.48399 1.35856 6.42557 1.34254 6.36135C1.32652 6.29714 1.32886 6.22971 1.34928 6.16676C1.36971 6.10381 1.40741 6.04786 1.45808 6.00529C1.50876 5.96272 1.57037 5.93524 1.6359 5.92597L5.07923 5.42264C5.30607 5.38964 5.52149 5.30201 5.70695 5.16729C5.89242 5.03258 6.04237 4.85482 6.1439 4.6493L7.68323 1.52997Z"
+                        fill="#C9972A" stroke="#C9972A" stroke-width="1.33333" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    </svg> Arts</strong>
+                  <span>Skilled painter, sculptor, and sketch artist</span>
+                </div>
+
+                <div class="legacy-item">
+                  <strong><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
+                      fill="none">
+                      <path
+                        d="M7.68323 1.52997C7.71245 1.47094 7.75758 1.42126 7.81353 1.38652C7.86949 1.35178 7.93404 1.33337 7.9999 1.33337C8.06576 1.33337 8.13031 1.35178 8.18626 1.38652C8.24222 1.42126 8.28735 1.47094 8.31656 1.52997L9.85656 4.6493C9.95802 4.85461 10.1078 5.03224 10.293 5.16694C10.4782 5.30164 10.6933 5.38938 10.9199 5.42264L14.3639 5.92664C14.4292 5.93609 14.4905 5.96362 14.5409 6.0061C14.5913 6.04859 14.6289 6.10434 14.6492 6.16704C14.6696 6.22975 14.6721 6.29691 14.6563 6.36093C14.6405 6.42495 14.6071 6.48327 14.5599 6.5293L12.0692 8.95464C11.905 9.1147 11.7821 9.31229 11.7111 9.53039C11.6402 9.74849 11.6233 9.98056 11.6619 10.2066L12.2499 13.6333C12.2614 13.6985 12.2544 13.7657 12.2296 13.8271C12.2048 13.8885 12.1632 13.9417 12.1096 13.9806C12.056 14.0196 11.9926 14.0426 11.9265 14.0472C11.8604 14.0518 11.7944 14.0378 11.7359 14.0066L8.65723 12.388C8.45438 12.2815 8.22868 12.2258 7.99956 12.2258C7.77044 12.2258 7.54475 12.2815 7.3419 12.388L4.2639 14.0066C4.20545 14.0376 4.1395 14.0515 4.07353 14.0468C4.00757 14.0421 3.94424 14.019 3.89076 13.9801C3.83728 13.9412 3.79579 13.8881 3.771 13.8268C3.74622 13.7655 3.73914 13.6984 3.75056 13.6333L4.3379 10.2073C4.3767 9.98112 4.35989 9.7489 4.28892 9.53067C4.21796 9.31243 4.09497 9.11474 3.93056 8.95464L1.4399 6.52997C1.39229 6.48399 1.35856 6.42557 1.34254 6.36135C1.32652 6.29714 1.32886 6.22971 1.34928 6.16676C1.36971 6.10381 1.40741 6.04786 1.45808 6.00529C1.50876 5.96272 1.57037 5.93524 1.6359 5.92597L5.07923 5.42264C5.30607 5.38964 5.52149 5.30201 5.70695 5.16729C5.89242 5.03258 6.04237 4.85482 6.1439 4.6493L7.68323 1.52997Z"
+                        fill="#C9972A" stroke="#C9972A" stroke-width="1.33333" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    </svg> Engineering</strong>
+                  <span>Designed water systems and infrastructure</span>
+                </div>
+
+                <div class="legacy-item">
+                  <strong><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
+                      fill="none">
+                      <path
+                        d="M7.68323 1.52997C7.71245 1.47094 7.75758 1.42126 7.81353 1.38652C7.86949 1.35178 7.93404 1.33337 7.9999 1.33337C8.06576 1.33337 8.13031 1.35178 8.18626 1.38652C8.24222 1.42126 8.28735 1.47094 8.31656 1.52997L9.85656 4.6493C9.95802 4.85461 10.1078 5.03224 10.293 5.16694C10.4782 5.30164 10.6933 5.38938 10.9199 5.42264L14.3639 5.92664C14.4292 5.93609 14.4905 5.96362 14.5409 6.0061C14.5913 6.04859 14.6289 6.10434 14.6492 6.16704C14.6696 6.22975 14.6721 6.29691 14.6563 6.36093C14.6405 6.42495 14.6071 6.48327 14.5599 6.5293L12.0692 8.95464C11.905 9.1147 11.7821 9.31229 11.7111 9.53039C11.6402 9.74849 11.6233 9.98056 11.6619 10.2066L12.2499 13.6333C12.2614 13.6985 12.2544 13.7657 12.2296 13.8271C12.2048 13.8885 12.1632 13.9417 12.1096 13.9806C12.056 14.0196 11.9926 14.0426 11.9265 14.0472C11.8604 14.0518 11.7944 14.0378 11.7359 14.0066L8.65723 12.388C8.45438 12.2815 8.22868 12.2258 7.99956 12.2258C7.77044 12.2258 7.54475 12.2815 7.3419 12.388L4.2639 14.0066C4.20545 14.0376 4.1395 14.0515 4.07353 14.0468C4.00757 14.0421 3.94424 14.019 3.89076 13.9801C3.83728 13.9412 3.79579 13.8881 3.771 13.8268C3.74622 13.7655 3.73914 13.6984 3.75056 13.6333L4.3379 10.2073C4.3767 9.98112 4.35989 9.7489 4.28892 9.53067C4.21796 9.31243 4.09497 9.11474 3.93056 8.95464L1.4399 6.52997C1.39229 6.48399 1.35856 6.42557 1.34254 6.36135C1.32652 6.29714 1.32886 6.22971 1.34928 6.16676C1.36971 6.10381 1.40741 6.04786 1.45808 6.00529C1.50876 5.96272 1.57037 5.93524 1.6359 5.92597L5.07923 5.42264C5.30607 5.38964 5.52149 5.30201 5.70695 5.16729C5.89242 5.03258 6.04237 4.85482 6.1439 4.6493L7.68323 1.52997Z"
+                        fill="#C9972A" stroke="#C9972A" stroke-width="1.33333" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    </svg> Languages</strong>
+                  <span>Fluent in Spanish, English, German, French, and 18+ others</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="gallery" class="tab-section">
+          <div class="gallery-wrap">
+            <h2 class="gallery-title">Image Gallery</h2>
+            <div class="gallery-divider"></div>
+
+            <div class="gallery-grid">
+              <div class="gallery-card">
+                <div class="gallery-frame">
+                  <img
+                    src="formal picture.png"
+                    alt="Formal Portrait">
+                </div>
+                <div class="gallery-caption">Formal Portrait</div>
+              </div>
+
+              <div class="gallery-card">
+                <div class="gallery-frame">
+                  <img
+                    src="rizal in europe.png"
+                    alt="European Setting">
+                </div>
+                <div class="gallery-caption">In Europe</div>
+              </div>
+
+              <div class="gallery-card">
+                <div class="gallery-frame">
+                  <img
+                    src="historical monument.png"
+                    alt="Historical Monument">
+                </div>
+                <div class="gallery-caption">Historical Monument</div>
+              </div>
+
+              <div class="gallery-card">
+                <div class="gallery-frame">
+                  <img
+                    src="memorial site.png"
+                    alt="Memorial Site">
+                </div>
+                <div class="gallery-caption">Memorial Site</div>
+              </div>
+
+              <div class="gallery-card">
+                <div class="gallery-frame">
+                  <img
+                    src="fort santiago.png"
+                    alt="Fort Santiago">
+                </div>
+                <div class="gallery-caption">Fort Santiago</div>
+              </div>
+
+              <div class="gallery-card">
+                <div class="gallery-frame">
+                  <img
+                    src="first edition.png"
+                    alt="First Edition of Noli Me Tangere">
+                </div>
+                <div class="gallery-caption">First Edition</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <footer class="footer">In Memory of the Philippine National Hero</footer>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    const tabs = document.querySelectorAll('.tab');
+    const sections = document.querySelectorAll('.tab-section');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const target = tab.dataset.tab;
+
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+
+        sections.forEach(section => {
+          section.classList.remove('active');
+        });
+
+        const activeSection = document.getElementById(target);
+        if (activeSection) {
+          activeSection.classList.add('active');
+        }
+      });
+    });
+  </script>
+
+</body>
+
+</html>
